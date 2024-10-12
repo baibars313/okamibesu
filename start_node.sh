@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # Function to start the specified node
+
 start_node() {
     NODE_NAME=$1
     ENODE_URL=$2
 
     if [ "$NODE_NAME" == "node1" ]; then
         COMMAND="besu --data-path=okami/Node-1/data \
-          --genesis-file=cliqueGenesis.json \
+          --genesis-file=okami/cliqueGenesis.json \
           --network-id 147 \
           --rpc-http-enabled \
           --rpc-http-api=ETH,NET,CLIQUE \
@@ -25,8 +26,8 @@ start_node() {
             exit 1
         fi
 
-        COMMAND="besu --data-path=okami/Node-2/data \
-          --genesis-file=cliqueGenesis.json \
+        COMMAND=" besu --data-path=okami/Node-2/data \
+          --genesis-file=okami/cliqueGenesis.json \
           --bootnodes=$ENODE_URL \
           --network-id 147 \
           --p2p-port=30304 \
@@ -47,18 +48,7 @@ start_node() {
             exit 1
         fi
 
-        COMMAND="besu --data-path=okami/Node-3/data \
-          --genesis-file=cliqueGenesis.json \
-          --bootnodes=$ENODE_URL \
-          --network-id 147 \
-          --p2p-port=30305 \
-          --rpc-http-enabled \
-          --rpc-http-api=ETH,NET,CLIQUE \
-          --rpc-http-host=0.0.0.0 \
-          --host-allowlist='*' \
-          --rpc-http-cors-origins='all' \
-          --rpc-http-port=8547 \
-          --profile=ENTERPRISE"
+        COMMAND="besu --data-path=okami/Node-3/data --genesis-file=okami/cliqueGenesis.json --bootnodes=$ENODE_URL --network-id 147 --p2p-port=30305 --rpc-http-enabled --rpc-http-api=ETH,NET,CLIQUE --host-allowlist="*" --rpc-http-cors-origins="all" --rpc-http-port=8547 --profile=ENTERPRISE"
 
         echo "Starting Node 3 with bootnodes $ENODE_URL..."
         eval "$COMMAND"

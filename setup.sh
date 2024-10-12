@@ -1,3 +1,4 @@
+# setup.sh
 #!/bin/bash
 
 # Create the root directory "okami" and subdirectories for each node
