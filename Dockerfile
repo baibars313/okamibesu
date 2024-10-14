@@ -1,6 +1,9 @@
 # Use Besu image as the base
 FROM hyperledger/besu:latest
 
+# Switch to root to perform setup tasks
+USER root
+
 # Set the working directory
 WORKDIR /app
 
@@ -9,11 +12,17 @@ COPY cliqueGenesis.json /app/cliqueGenesis.json
 COPY setup.sh /app/setup.sh
 COPY start_node.sh /app/start_node.sh
 
+
 # Make scripts executable
 RUN chmod +x /app/setup.sh /app/start_node.sh
+RUN chmod +x /app/setup.sh /app/start_node.sh
 
-# Run the setup script
+# # Update the package list and install curl
+# RUN apt-get update && apt-get install -y curl
+
+# Run the setup script as root
 RUN /app/setup.sh
 
-# Start the Besu node (Node-1 as default)
-CMD ["/app/start_node.sh", "node1"]
+# Switch back to the Besu default user after setup
+USER besu
+

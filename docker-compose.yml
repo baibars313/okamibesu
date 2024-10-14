@@ -9,7 +9,9 @@ services:
       - "30303:30303" # P2P port
     volumes:
       - ./okami/Node-1/data:/app/okami/Node-1/data
-    command: ["/app/start_node.sh", "node1"]
+    user: root
+    entrypoint: ["/bin/bash"]
+    command: ["-c","./start_node.sh node1"]
 
   node2:
     build: .
@@ -19,7 +21,9 @@ services:
       - "30304:30304" # P2P port
     volumes:
       - ./okami/Node-2/data:/app/okami/Node-2/data
-    command: ["/app/start_node.sh", "node2", "enode://node1_enode_url"]
+    user: root
+    entrypoint: ["/bin/bash"]
+    command: ["./start_node.sh", "node2", "enode://ef04f3cf65b63ab10d298494a39c17ec104a1473aec80d9e6c34e12b14d1efc051bee70cefeec9795d22960c0e50b7fc14562b011d7c8161dd4c53b8504e18a6@192.168.100.24:30303"]
 
   node3:
     build: .
@@ -29,4 +33,7 @@ services:
       - "30305:30305" # P2P port
     volumes:
       - ./okami/Node-3/data:/app/okami/Node-3/data
-    command: ["/app/start_node.sh", "node3", "enode://node1_enode_url"]
+    user: root
+    
+    entrypoint: ["/bin/bash"]
+    command: ['-c', 'cat okami/cliqueGenesis.json'] #["./start_node.sh", "node3", "enode://ef04f3cf65b63ab10d298494a39c17ec104a1473aec80d9e6c34e12b14d1efc051bee70cefeec9795d22960c0e50b7fc14562b011d7c8161dd4c53b8504e18a6@127.0.0.1:30303"]
