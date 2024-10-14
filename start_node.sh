@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# ps aux | grep besu
 # Function to start the specified node
 start_node() {
     NODE_NAME=$1
@@ -17,7 +17,7 @@ start_node() {
           --profile=ENTERPRISE"
 
         echo "Starting Node 1..."
-        eval "$COMMAND"
+        eval "$COMMAND >> node1.log 2>&1 &"
 
     elif [ "$NODE_NAME" == "node2" ]; then
         if [ -z "$ENODE_URL" ]; then
@@ -39,7 +39,7 @@ start_node() {
           --profile=ENTERPRISE"
 
         echo "Starting Node 2 with bootnodes $ENODE_URL..."
-        eval "$COMMAND"
+        eval "$COMMAND >> node2.log 2>&1 &"
 
     elif [ "$NODE_NAME" == "node3" ]; then
         if [ -z "$ENODE_URL" ]; then
@@ -61,7 +61,7 @@ start_node() {
           --profile=ENTERPRISE"
 
         echo "Starting Node 3 with bootnodes $ENODE_URL..."
-        eval "$COMMAND"
+        eval "$COMMAND >> node3.log 2>&1 &"
 
     elif [ "$NODE_NAME" == "show-genesis" ]; then
         COMMAND="cat okami/cliqueGenesis.json"
