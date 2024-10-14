@@ -4,23 +4,26 @@
 stop_besu_services() {
     echo "Stopping Besu services..."
 
-    # Get the PID of the Besu process
-    besu_pid=$(pgrep -f besu)
+    # Get the PIDs of the Besu processes
+    besu_pids=$(pgrep -f besu)
 
-    if [ -z "$besu_pid" ]; then
+    if [ -z "$besu_pids" ]; then
         echo "No Besu service is running."
     else
-        echo "Stopping Besu process with PID: $besu_pid"
-        kill -TERM "$besu_pid"  # Send a TERM signal to gracefully stop the process
-        sleep 2  # Wait for 2 seconds to allow the process to terminate
+        # Iterate over each PID and stop the process
+        for pid in $besu_pids; do
+            echo "Stopping Besu process with PID: $pid"
+            kill -TERM "$pid"  # Send a TERM signal to gracefully stop the process
+            sleep 2  # Wait for 2 seconds to allow the process to terminate
 
-        # Check if the process has terminated
-        if ps -p "$besu_pid" > /dev/null; then
-            echo "Besu process did not terminate. Forcing termination..."
-            kill -KILL "$besu_pid"  # Forcefully kill the process if it hasn't terminated
-        else
-            echo "Besu process stopped successfully."
-        fi
+            # Check if the process has terminated
+            if ps -p "$pid" > /dev/null; then
+                echo "Besu process with PID $pid did not terminate. Forcing termination..."
+                kill -KILL "$pid"  # Forcefully kill the process if it hasn't terminated
+            else
+                echo "Besu process with PID $pid stopped successfully."
+            fi
+        done
     fi
 }
 
