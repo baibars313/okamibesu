@@ -6,7 +6,7 @@ start_node() {
     ENODE_URL=$2
 
     if [ "$NODE_NAME" == "node1" ]; then
-        COMMAND="besu --data-path=okami/Node-1/data \
+        COMMAND="/usr/local/bin/besu/bin/besu --data-path=okami/Node-1/data \
           --genesis-file=okami/cliqueGenesis.json \
           --network-id 147 \
           --rpc-http-enabled \
@@ -25,7 +25,7 @@ start_node() {
             exit 1
         fi
 
-        COMMAND="besu --data-path=okami/Node-2/data \
+        COMMAND="/usr/local/bin/besu/bin/besu --data-path=okami/Node-2/data \
           --genesis-file=okami/cliqueGenesis.json \
           --bootnodes=$ENODE_URL \
           --network-id 147 \
@@ -47,7 +47,7 @@ start_node() {
             exit 1
         fi
 
-        COMMAND="besu --data-path=okami/Node-3/data \
+        COMMAND="/usr/local/bin/besu/bin/besu --data-path=okami/Node-3/data \
           --genesis-file=okami/cliqueGenesis.json \
           --bootnodes=$ENODE_URL \
           --network-id 147 \
