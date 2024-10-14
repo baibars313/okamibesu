@@ -6,7 +6,7 @@ mkdir -p okami/Node-1/data okami/Node-2/data okami/Node-3/data
 
 # Change to Node-1 directory and export the node address
 cd okami/Node-1/ || { echo "Failed to change directory to okami/Node-1"; exit 1; }
-besu --data-path=data public-key export-address --to=data/node1Address
+/usr/local/bin/besu/bin/besu --data-path=data public-key export-address --to=data/node1Address
 
 # Check if the address file was created successfully
 if [ ! -f data/node1Address ]; then
