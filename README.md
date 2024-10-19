@@ -1,4 +1,4 @@
-```markdown
+
 # OkamiBesu 🐺 - Clique POA Besu Network
 
 This repository contains the configuration to set up a private Ethereum network using Hyperledger Besu with Clique Proof of Authority (POA) consensus. Follow the steps below to clone, configure, start, and manage your Besu network nodes.
