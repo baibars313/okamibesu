@@ -8,8 +8,6 @@ This repository contains the configuration to set up a private Ethereum network 
 Make sure the following are installed on your machine:
 
 - [Git](https://git-scm.com/)
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
 
 ## Setup Instructions 🛠️
 
@@ -87,7 +85,14 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"clique_getSigners","params":["la
 > 📌 **Note**: Replace `<your_ip>` with the actual IP address of your node.
 
 ---
+## Rsetting Chain
+```bash
+# remove okami folder using command use sudo if you need superuser to remove folder 
+sudo rm -rf okami 
+# or 
+rm -rf okami
 
+```
 ## Contributing 🖊️
 
 Feel free to fork the repository and submit pull requests. Contributions to improve the configuration or add new features to the Besu network setup are welcome!
